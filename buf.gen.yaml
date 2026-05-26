@@ -1,0 +1,10 @@
+version: v2
+plugins:
+  - plugin: buf.build/protocolbuffers/java
+    out: generated/java
+  - plugin: buf.build/grpc/java
+    out: generated/java
+  - plugin: buf.build/protocolbuffers/python
+    out: generated/python
+  - plugin: buf.build/grpc/python
+    out: generated/python

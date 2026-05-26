@@ -1,0 +1,26 @@
+syntax = "proto3";
+package dinoinsure.common.v1;
+option java_package = "ma.dinoinsure.common.v1";
+option java_multiple_files = true;
+
+message Money {
+  int64 amount_centimes = 1;
+  string currency = 2;
+}
+
+enum Language {
+  LANGUAGE_UNSPECIFIED = 0;
+  LANGUAGE_FR = 1;
+  LANGUAGE_AR = 2;
+  LANGUAGE_DARIJA = 3;
+}
+
+enum PolicyType {
+  POLICY_TYPE_UNSPECIFIED = 0;
+  POLICY_TYPE_AUTO = 1;
+  POLICY_TYPE_HOME = 2;
+  POLICY_TYPE_HEALTH = 3;
+  POLICY_TYPE_LIFE = 4;
+  POLICY_TYPE_TRAVEL = 5;
+  POLICY_TYPE_PROFESSIONAL = 6;
+}

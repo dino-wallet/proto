@@ -1,0 +1,41 @@
+syntax = "proto3";
+package dinoinsure.document.v1;
+option java_package = "ma.dinoinsure.document.v1";
+option java_multiple_files = true;
+
+import "dinoinsure/common/v1/types.proto";
+
+service DocumentServiceGrpc {
+  rpc ExtractDocument(ExtractDocumentRequestGrpc) returns (ExtractDocumentResponseGrpc);
+}
+
+message ExtractDocumentRequestGrpc {
+  bytes front_page_bytes = 1;
+  bytes back_page_bytes = 2;
+  string filename = 3;
+  common.v1.PolicyType policy_type = 4;
+  string user_id = 5;
+}
+
+message ExtractDocumentResponseGrpc {
+  string document_url = 1;
+  string anonymized_summary = 2;
+  ExtractedPolicyDataGrpc extracted = 3;
+}
+
+message ExtractedPolicyDataGrpc {
+  string insurer_name = 1;
+  string insurer_logo_url = 2;
+  common.v1.PolicyType policy_type = 3;
+  string policy_number = 4;
+  int64 start_date_unix = 5;
+  int64 end_date_unix = 6;
+  common.v1.Money annual_premium = 7;
+  common.v1.Money franchise = 8;
+  repeated string coverages = 9;
+  repeated string exclusions = 10;
+  string vehicle_brand = 11;
+  string vehicle_model = 12;
+  string vehicle_plate = 13;
+  float confidence_score = 14;
+}

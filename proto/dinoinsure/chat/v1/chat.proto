@@ -1,0 +1,25 @@
+syntax = "proto3";
+package dinoinsure.chat.v1;
+option java_package = "ma.dinoinsure.chat.v1";
+option java_multiple_files = true;
+
+import "dinoinsure/common/v1/types.proto";
+import "dinoinsure/policy/v1/policy.proto";
+
+service ChatServiceGrpc {
+  rpc Chat(ChatRequestGrpc) returns (stream ChatChunkGrpc);
+}
+
+message ChatRequestGrpc {
+  string conversation_id = 1;
+  string user_id = 2;
+  string message = 3;
+  common.v1.Language language = 4;
+  repeated policy.v1.PolicyResponseGrpc policies = 5;
+}
+
+message ChatChunkGrpc {
+  string token = 1;
+  bool is_final = 2;
+  string conversation_id = 3;
+}

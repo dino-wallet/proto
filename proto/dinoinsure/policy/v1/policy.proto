@@ -1,0 +1,85 @@
+syntax = "proto3";
+package dinoinsure.policy.v1;
+option java_package = "ma.dinoinsure.policy.v1";
+option java_multiple_files = true;
+
+import "dinoinsure/common/v1/types.proto";
+
+service PolicyServiceGrpc {
+  rpc CreatePolicy(CreatePolicyRequestGrpc) returns (PolicyResponseGrpc);
+  rpc UpdatePolicy(UpdatePolicyRequestGrpc) returns (PolicyResponseGrpc);
+  rpc GetPolicy(GetPolicyRequestGrpc) returns (PolicyResponseGrpc);
+  rpc GetUserPolicies(GetUserPoliciesRequestGrpc) returns (GetUserPoliciesResponseGrpc);
+  rpc DeletePolicy(DeletePolicyRequestGrpc) returns (DeletePolicyResponseGrpc);
+}
+
+message CreatePolicyRequestGrpc {
+  string user_id = 1;
+  string insurer_name = 2;
+  string insurer_logo_url = 3;
+  common.v1.PolicyType policy_type = 4;
+  string policy_number = 5;
+  int64 start_date_unix = 6;
+  int64 end_date_unix = 7;
+  common.v1.Money annual_premium = 8;
+  common.v1.Money franchise = 9;
+  repeated string coverages = 10;
+  repeated string exclusions = 11;
+  string document_url = 12;
+  string anonymized_summary = 13;
+  string vehicle_brand = 14;
+  string vehicle_model = 15;
+  string vehicle_plate = 16;
+}
+
+message UpdatePolicyRequestGrpc {
+  string policy_id = 1;
+  string user_id = 2;
+  string insurer_name = 3;
+  int64 end_date_unix = 4;
+  common.v1.Money annual_premium = 5;
+  common.v1.Money franchise = 6;
+}
+
+message GetPolicyRequestGrpc {
+  string policy_id = 1;
+  string user_id = 2;
+}
+
+message GetUserPoliciesRequestGrpc {
+  string user_id = 1;
+}
+
+message GetUserPoliciesResponseGrpc {
+  repeated PolicyResponseGrpc policies = 1;
+}
+
+message DeletePolicyRequestGrpc {
+  string policy_id = 1;
+  string user_id = 2;
+}
+
+message DeletePolicyResponseGrpc {
+  bool success = 1;
+}
+
+message PolicyResponseGrpc {
+  string id = 1;
+  string user_id = 2;
+  string insurer_name = 3;
+  string insurer_logo_url = 4;
+  common.v1.PolicyType policy_type = 5;
+  string policy_number = 6;
+  int64 start_date_unix = 7;
+  int64 end_date_unix = 8;
+  common.v1.Money annual_premium = 9;
+  common.v1.Money franchise = 10;
+  repeated string coverages = 11;
+  repeated string exclusions = 12;
+  string document_url = 13;
+  string anonymized_summary = 14;
+  string vehicle_brand = 15;
+  string vehicle_model = 16;
+  string vehicle_plate = 17;
+  int64 created_at_unix = 18;
+}

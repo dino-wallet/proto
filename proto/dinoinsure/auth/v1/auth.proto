@@ -1,0 +1,40 @@
+syntax = "proto3";
+package dinoinsure.auth.v1;
+option java_package = "ma.dinoinsure.auth.v1";
+option java_multiple_files = true;
+
+service AuthServiceGrpc {
+  rpc ValidateToken(ValidateTokenRequestGrpc) returns (ValidateTokenResponseGrpc);
+  rpc GetUser(GetUserRequestGrpc) returns (UserResponseGrpc);
+  rpc CreateOrUpdateUser(CreateOrUpdateUserRequestGrpc) returns (UserResponseGrpc);
+}
+
+message ValidateTokenRequestGrpc {
+  string token = 1;
+}
+
+message ValidateTokenResponseGrpc {
+  bool valid = 1;
+  string user_id = 2;
+  string email = 3;
+}
+
+message GetUserRequestGrpc {
+  string user_id = 1;
+}
+
+message CreateOrUpdateUserRequestGrpc {
+  string google_id = 1;
+  string email = 2;
+  string name = 3;
+  string picture_url = 4;
+}
+
+message UserResponseGrpc {
+  string id = 1;
+  string email = 2;
+  string name = 3;
+  string picture_url = 4;
+  string preferred_language = 5;
+  string expo_push_token = 6;
+}
